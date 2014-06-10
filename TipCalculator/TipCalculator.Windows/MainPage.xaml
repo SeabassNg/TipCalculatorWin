@@ -1,0 +1,141 @@
+﻿<Page
+    x:Class="TipCalculator.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TipCalculator"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="350" />
+            <ColumnDefinition MinWidth="350" />
+        </Grid.ColumnDefinitions>
+        <ListView Grid.Column="0">
+            <StackPanel Style="{StaticResource StackRowDesk}">
+                <TextBlock
+                    Text="Subtotal"
+                    Style="{StaticResource Labels}"/>
+                <TextBlock Style="{StaticResource Currency}"/>
+                <local:NumberTextBox
+                    x:Name="SubtotalTB"
+                    DecimalPlaces="2"
+                    TextChanged="OnSubtotal_TextChanged"
+                    Style="{StaticResource RestrictedTextBoxDesk}" InputScope="Number"/>
+            </StackPanel>
+            <StackPanel
+                Style="{StaticResource StackRowDesk}"
+                Margin="20,10,20,0">
+                <TextBlock
+                    Text="Tax"
+                    Style="{StaticResource Labels}"/>
+                <TextBlock
+                    x:Name="TaxTB"
+                    Text="$0.00"
+                    Style="{StaticResource PrefillTextBox}"/>
+            </StackPanel>
+            <StackPanel 
+                Style="{StaticResource StackRowDesk}"
+                Margin="20,10,20,0">
+                <TextBlock
+                    Text="Tax Rate"
+                    Style="{StaticResource Labels}"/>
+                <TextBlock
+                    x:Name="TaxRateTB"
+                    Text="0%"
+                    Style="{StaticResource PrefillTextBox}"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource StackRowDesk}">
+                <TextBlock
+                    Text="PreTip Total"
+                    Style="{StaticResource Labels}"/>
+                <TextBlock
+                    Style="{StaticResource Currency}"/>
+                <local:NumberTextBox
+                    x:Name="PretipTB"
+                    DecimalPlaces="2"
+                    TextChanged="onPretip_TextChanged"
+                    Style="{StaticResource RestrictedTextBoxDesk}" InputScope="Number"/>
+            </StackPanel>
+            <StackPanel
+                Orientation="Vertical"
+                Margin="20,0,20,0">
+                <TextBlock
+                    HorizontalAlignment="Left"
+                    Text="Calculate tip"
+                    Margin="0,10,0,0"
+                    TextWrapping="NoWrap"
+                    FontSize="20"
+                    VerticalAlignment="Top"/>
+                <RadioButton
+                    x:Name="WithTaxesRB"
+                    Margin="20,0,0,0"
+                    Content="With taxes"
+                    Width="Auto"
+                    GroupName="TaxRadio"
+                    Checked="IncludeTax_RadioChanged"
+                    IsChecked="True" />
+                <RadioButton
+                    x:Name="WithoutTaxesRB"
+                    Margin="20,0,0,0"
+                    Content="Without taxes"
+                    GroupName="TaxRadio"
+                    Checked="IncludeTax_RadioChanged"
+                    Width="Auto"/>
+            </StackPanel>
+        </ListView>
+        <ListView Grid.Column="1">
+            <StackPanel Style="{StaticResource StackRowDesk}">
+                <TextBlock
+                    Text="Tip Percentage"
+                    Style="{StaticResource Labels}"/>
+                <local:NumberTextBox
+                    x:Name="TipPercentageTB"
+                    DecimalPlaces="3"
+                    TextChanged="onTipPercentage_TextChanged"
+                    Style="{StaticResource RestrictedTextBoxDesk}" InputScope="Number"/>
+                <TextBlock Style="{StaticResource Percentage}"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource StackRowDesk}">
+                <TextBlock
+                    Text="Tip Amount"
+                    Style="{StaticResource Labels}"/>
+                <TextBlock Style="{StaticResource Currency}"/>
+                <local:NumberTextBox
+                    x:Name="TipAmountTB"
+                    DecimalPlaces="2"
+                    TextChanged="onTipAmount_TextChanged"
+                    Style="{StaticResource RestrictedTextBoxDesk}"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource StackRowDesk}">
+                <TextBlock
+                    Text="Total Amount"
+                    Style="{StaticResource Labels}"/>
+                <TextBlock Style="{StaticResource Currency}"/>
+                <local:NumberTextBox
+                    x:Name="TotalTB"
+                    DecimalPlaces="2"
+                    TextChanged="onTotal_TextChanged"
+                    Style="{StaticResource RestrictedTextBoxDesk}" InputScope="Number"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource StackRowDesk}">
+                <Button
+                    x:Name="RoundButton"
+                    Content="Round up total"
+                    Click="onRoundButton_Pressed"/>
+                <Button
+                    x:Name="ClearButton"
+                    Content="Clear"
+                    Click="onClearButton_Pressed"/>
+            </StackPanel>
+        </ListView>
+    </Grid>
+</Page>
